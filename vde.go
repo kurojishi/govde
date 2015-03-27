@@ -1,5 +1,5 @@
 // Package vde the interface to send package to vde2 transport
-package vde
+package govde
 
 import (
 	"net"
