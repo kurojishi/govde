@@ -29,14 +29,21 @@ func Connect(netType string, address string, conf map[string]string) (*Connectio
 	return connection, err
 }
 
+//Initialize a Listener to receive packets
+//TODO: make this a ConnectionVde like object
+func Listener(netType string, address string, conf map[string]string) (listen net.Listener, err error) {
+	listen, err = net.Listen(netType, address)
+	return
+}
+
 //Send packets
-func Send(conn *ConnectionVde, payload []byte) (err error) {
+func (conn *ConnectionVde) Send(payload []byte) (err error) {
 	_, err = conn.connection.Write(payload)
 	return err
 }
 
 //Receive packets
-func Receive(conn *ConnectionVde) (payload []byte, err error) {
+func (conn *ConnectionVde) Receive() (payload []byte, err error) {
 	_, err = conn.connection.Read(payload)
 	return payload, err
 }
